@@ -2,6 +2,16 @@
 
 using namespace std;
 
+void multiply(const double* A, const double* B, double* result, int block_size) {
+    for (int i = 0; i < block_size; ++i) {
+        for (int j = 0; j < block_size; ++j) {
+            for (int k = 0; k < block_size; ++k){
+                result[i * block_size + j] += A[i * block_size + k] * B[k * block_size + j];
+            }
+        }
+    }
+}
+
 // Function to perform matrix multiplication with padding
 void blockedMatrixMultiply(const double* A, const double* B, double* C,
                             int m, int n, int p, int block_size) {
@@ -32,11 +42,25 @@ void blockedMatrixMultiply(const double* A, const double* B, double* C,
     for (int i = 0; i < m_padded; i += block_size) {
         for (int j = 0; j < p_padded; j += block_size) {
             for (int k = 0; k < n_padded; k += block_size) {
-                for (int ii = i; ii < min(i + block_size, m_padded); ++ii) {
-                    for (int jj = j; jj < min(j + block_size, p_padded); ++jj) {
-                        for (int kk = k; kk < min(k + block_size, n_padded); ++kk) {
-                            C_padded[ii * p_padded + jj] += A_padded[ii * n_padded + kk] * B_padded[kk * p_padded + jj];
+
+                double *A_tmp = new double [block_size * block_size]();
+                double *B_tmp = new double [block_size * block_size]();
+                double *C_tmp = new double [block_size * block_size]();
+
+                for (int ii = i; ii < i + block_size; ++ii) {
+                    for (int jj = j; jj < j + block_size; ++jj) {
+                        for (int kk = k; kk <k + block_size; ++kk) {
+                            A_tmp[(ii-i)*block_size+(kk-k)] = A_padded[ii * n_padded + kk];
+                            B_tmp[(kk-k)*block_size+(jj-j)] = B_padded[kk * p_padded + jj];
                         }
+                    }
+                }
+                multiply(A_tmp,B_tmp,C_tmp,block_size);
+                for(int ii=0;ii<block_size;ii++)
+                {
+                    for(int jj=0;jj<block_size;jj++)
+                    {
+                        C_padded[(i+ii)*p_padded+j+jj] += C_tmp[ii*block_size+jj]; 
                     }
                 }
             }
@@ -58,9 +82,9 @@ void blockedMatrixMultiply(const double* A, const double* B, double* C,
 
 int main() {
     // Example usage
-    int m = 2;
-    int n = 5;
-    int p = 8;
+    int m = 8;
+    int n = 3;
+    int p = 5;
 
     // Initialize matrices A, B, and C
     double* A = new double[m * n];
@@ -77,7 +101,7 @@ int main() {
     }
 
     // Specify block size
-    int block_size = 3;
+    int block_size = 5;
 
     // Perform blocked matrix multiplication with padding
     blockedMatrixMultiply(A, B, C, m, n, p, block_size);

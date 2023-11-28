@@ -6,7 +6,7 @@ class Systolic
         int size,delay;
         Punit *SystolicArray;
 
-    Systolic(int size,int delay)
+    Systolic(int size=3,int delay=1)
     {
         this->size = size;
         SystolicArray = (Punit*)malloc(sizeof(Punit)*size*size);
@@ -49,24 +49,24 @@ class Systolic
     }
     int RunMAC(int *multiply_inputs)
     {
-        bool stalled = false;
-        for(int i=0;i<size;i++)
-        {
-            for(int j=0;j<size;j++)
+        bool stalled;
+        int delay_cycles = 0;
+        do{
+            stalled = false;
+            for(int i=0;i<size;i++)
             {
-                Punit *P_tmp = getPunit(i,j);
-                if(P_tmp->delay_ctr>=1)
+                for(int j=0;j<size;j++)
                 {
-                    stalled = true;
-                    P_tmp->cycle();
+                    Punit *P_tmp = getPunit(i,j);
+                    if(P_tmp->delay_ctr>=1)
+                    {
+                        stalled = true;
+                        P_tmp->cycle();
+                    }
                 }
             }
-        }
-
-        if(stalled)
-        {
-            return(-1);
-        }
+            delay_cycles++;
+        }while(stalled);
 
         for(int i=0;i<size;i++)
         {
@@ -106,7 +106,7 @@ class Systolic
                 P_tmp->setAddInput(P_tmp_prev_MAC->MAC_output);
             }
         }
-        return(0);
+        return(delay_cycles);
     }
     void cycle()
     {
@@ -117,6 +117,14 @@ class Systolic
         //Execute the Systolic Array Multiplication
 
         //Eecute transfer of Buffered Weights
+    }
+
+    void returnOutput(int *weights)
+    {
+        for(int i=0;i<size;i++)
+        {
+            weights[i] = getPunit(i,size-1)->MAC_output;
+        }
     }
 
     void print_status(bool weights,bool RMAC_ouptut)
