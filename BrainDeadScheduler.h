@@ -1,4 +1,3 @@
-//Later fix the issue when n is an odd number, random zeroes
 #include"LimitedScheduler.h"
 #include<iostream>
 
