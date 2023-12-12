@@ -7,9 +7,9 @@ class BaseScheduler{
     int size;
     int weight_load_stalls,multiplication_cycles,wasted_input_cycles,weight_switches;
 
-    BaseScheduler(int size=3)
+    BaseScheduler(int size=4,int delay=1)
     {
-        this->S = Systolic(size,1);
+        this->S = Systolic(size,delay);
         this->size = size;
         this->weight_load_stalls = 0;
         this->multiplication_cycles = 0;
@@ -81,6 +81,8 @@ class BaseScheduler{
             }
         }   
         this->wasted_input_cycles+=size;
+        delete[] BPadded;
+        delete[] output;
     }
 
     void print_report()

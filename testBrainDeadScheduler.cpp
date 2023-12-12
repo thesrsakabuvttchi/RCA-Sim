@@ -3,9 +3,9 @@ int main()
 {
     BrainDeadScheduler Bds(2);
     int l,m,n;
-    l = 4;
-    m = 3;
-    n = 3;
+    l = 1;
+    m = 784;
+    n = 10;
 
     int* A = new int[l * m]();
     int* B = new int[m * n]();

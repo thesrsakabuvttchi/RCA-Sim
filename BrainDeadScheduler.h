@@ -3,7 +3,7 @@
 
 class BrainDeadScheduler : BaseScheduler{
     public:
-    BrainDeadScheduler(int size) : BaseScheduler(size)
+    BrainDeadScheduler(int size=4,int delay=1) : BaseScheduler(size,delay)
     {
 
     }
@@ -57,6 +57,10 @@ class BrainDeadScheduler : BaseScheduler{
                             C_padded[(i+ii)*p_padded+j+jj] += C_tmp[ii*size+jj]; 
                         }
                     }
+                            // Deallocate memory
+                    delete[] A_tmp;
+                    delete[] B_tmp;
+                    delete[] C_tmp;
                 }
             }
         }
