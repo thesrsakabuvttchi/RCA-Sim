@@ -8,7 +8,7 @@
 int main()
 {
     FILE * fp;
-    fp = fopen ("weight_file.txt", "r");
+    fp = fopen ("weight_file_MLP.txt", "r");
     char buffer[1024];
 
     int *weights = (int*)malloc(ROWNUM*COLNUM*sizeof(int));
@@ -43,10 +43,10 @@ int main()
 
     fclose(fp);
 
-    fp = fopen ("input_file.txt", "r");
+    fp = fopen ("input_file_MLP.txt", "r");
     int *input = (int*)malloc(ROWNUM*sizeof(int)),label,predicted;
     int *results = (int*)malloc(COLNUM*sizeof(int));
-    BrainDeadScheduler Bds(4);
+    BrainDeadScheduler Bds(8);
     int total=0,correct=0;
 
 
