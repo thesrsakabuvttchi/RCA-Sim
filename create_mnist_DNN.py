@@ -99,7 +99,7 @@ dense1 = quantized_model_weights["dense_1"]
 #     print(result,np.argmax(result),test_labels[i])
 
 
-with open("weight_file.txt","w") as wf:
+with open("weight_file_DNN.txt","w") as wf:
   for i in quantized_model_weights:
       weights = quantized_model_weights[i][0]
       biases = quantized_model_weights[i][1]

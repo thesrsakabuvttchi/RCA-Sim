@@ -9,6 +9,12 @@ int main()
 {
     FILE * fp;
     fp = fopen ("weight_file_MLP.txt", "r");
+    if(!fp)
+    {
+        printf("Unable to open weight file. Have you run make setup?\n");
+        exit(-1);
+    }
+
     char buffer[1024];
 
     int *weights = (int*)malloc(ROWNUM*COLNUM*sizeof(int));
@@ -17,7 +23,7 @@ int main()
     fscanf(fp,"%s",buffer);
     if(strcmp(buffer,"Weights:"))
     {
-        printf("Format Error(Weights): please check weight file format\n",buffer);
+        printf("Format Error(Weights): please check weight file format\n");
         exit(-1);
     }
     for(int i=0;i<ROWNUM;i++)
@@ -32,7 +38,7 @@ int main()
     fscanf(fp,"%s",buffer);
     if(strcmp(buffer,"Biases:"))
     {
-        printf("Format Error(Biases): please check weight file format\n",buffer);
+        printf("Format Error(Biases): please check weight file format\n");
         exit(-1);
     }
     for(int j=0;j<COLNUM;j++)
@@ -43,7 +49,7 @@ int main()
 
     fclose(fp);
 
-    fp = fopen ("input_file_MLP.txt", "r");
+    fp = fopen ("input_file.txt", "r");
     int *input = (int*)malloc(ROWNUM*sizeof(int)),label,predicted;
     int *results = (int*)malloc(COLNUM*sizeof(int));
     BrainDeadScheduler Bds(8);
@@ -59,7 +65,7 @@ int main()
         }
         if(strcmp(buffer,"Input:"))
         {
-            printf("Format Error(Input): please check input file format\n",buffer);
+            printf("Format Error(Input): please check input file format\n");
             exit(-1);
         }
         for(int j=0;j<ROWNUM;j++)

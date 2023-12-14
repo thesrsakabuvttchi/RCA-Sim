@@ -13,7 +13,7 @@ void readLayerWeights(FILE *fp,int *weights, int *biases, int rownum, int colnum
     fscanf(fp,"%s",buffer);
     if(strcmp(buffer,"Weights:"))
     {
-        printf("Format Error(Weights): please check weight file format\n",buffer);
+        printf("Format Error(Weights): please check weight file format\n");
         exit(-1);
     }
     for(int i=0;i<rownum;i++)
@@ -28,7 +28,7 @@ void readLayerWeights(FILE *fp,int *weights, int *biases, int rownum, int colnum
     fscanf(fp,"%s",buffer);
     if(strcmp(buffer,"Biases:"))
     {
-        printf("Format Error(Biases): please check weight file format\n",buffer);
+        printf("Format Error(Biases): please check weight file format\n");
         exit(-1);
     }
     for(int j=0;j<colnum;j++)
@@ -47,7 +47,12 @@ void applyRELU(int *results,int size)
 int main()
 {
     FILE * fp;
-    fp = fopen ("weight_file.txt", "r");
+    fp = fopen ("weight_file_DNN.txt", "r");
+    if(!fp)
+    {
+        printf("Unable to open weight file. Have you run make setup?\n");
+        exit(-1);
+    }
     char buffer[1024];
 
     int *dense1_weights = (int*)malloc(DENSE1_RNUM*DENSE1_COLNUM*sizeof(int));
@@ -61,7 +66,7 @@ int main()
 
     fclose(fp);
 
-    fp = fopen ("input_file_MLP.txt", "r");
+    fp = fopen ("input_file.txt", "r");
     int *input = (int*)malloc(DENSE1_RNUM*sizeof(int)),label,predicted;
     int *intermediate = (int*)malloc(DENSE1_COLNUM*sizeof(int));
     int *results = (int*)malloc(DENSE2_COLNUM*sizeof(int));

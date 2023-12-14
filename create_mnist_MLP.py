@@ -67,7 +67,7 @@ for layer in model2.layers:
 test_loss, test_acc = model2.evaluate(test_images_flat, test_labels)
 print(f"\nTest accuracy Quantized: {test_acc}")
 
-with open("weight_file.txt","w") as wf:
+with open("weight_file_MLP.txt","w") as wf:
   for i in quantized_model_weights:
       weights = quantized_model_weights[i][0]
       biases = quantized_model_weights[i][1]
