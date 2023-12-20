@@ -1,5 +1,10 @@
 #include<iostream>
 #include<unistd.h>
+
+#ifndef BITMASK
+#define BITMASK 0b11111111111111111111111111111100
+#endif
+
 class Punit
 {
     public:
@@ -33,7 +38,7 @@ class Punit
         void MAC()
         {
             delay_ctr = delay_cycles;
-            MAC_output = weight*MulInput+AddInput;
+            MAC_output = (weight&BITMASK)*(MulInput&BITMASK)+AddInput;
         }
         void updateWeights(int new_weight)
         {

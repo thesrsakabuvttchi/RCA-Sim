@@ -3,9 +3,9 @@ int main()
 {
     BrainDeadScheduler Bds(2);
     int l,m,n;
-    l = 1;
-    m = 784;
-    n = 10;
+    l = 3;
+    m = 4;
+    n = 3;
 
     int* A = new int[l * m]();
     int* B = new int[m * n]();
@@ -23,6 +23,7 @@ int main()
         B[i] = i;
     }
 
+    std::cout<<"Input 1\n";
     for(int i=0;i<l;i++)
     {
         for(int j=0;j<m;j++)
@@ -33,6 +34,7 @@ int main()
     }
     std::cout<<"\n";
 
+    std::cout<<"Input 2\n";
     for(int i=0;i<m;i++)
     {
         for(int j=0;j<n;j++)
@@ -45,6 +47,7 @@ int main()
 
     Bds.scheduleBlockedMM(A,B,C,l,m,n);
 
+    std::cout<<"Output\n";
     for(int i=0;i<l;i++)
     {
         for(int j=0;j<n;j++)
@@ -53,6 +56,6 @@ int main()
         }
         std::cout<<"\n";
     }
-
+    std::cout<<"\n";
     Bds.print_report();
 }

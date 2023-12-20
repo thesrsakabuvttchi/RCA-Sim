@@ -1,4 +1,4 @@
-all: BASIC_BLOCKED_SCHED MNIST_DNN MNIST_MLP
+all: BASIC_SCHED BASIC_BLOCKED_SCHED MNIST_DNN MNIST_MLP
 
 setup: setup_DNN setup_MLP
 
@@ -7,6 +7,9 @@ setup_DNN:
 
 setup_MLP:
 	python3 create_mnist_MLP.py
+
+BASIC_SCHED: testLimitedScheduler.cpp
+	g++ testLimitedScheduler.cpp -o testLimitedScheduler
 
 BASIC_BLOCKED_SCHED: testBrainDeadScheduler.cpp
 	g++ testBrainDeadScheduler.cpp -o testBlockedScheduler

@@ -48,11 +48,6 @@ int main()
 {
     FILE * fp;
     fp = fopen ("weight_file_DNN.txt", "r");
-    if(!fp)
-    {
-        printf("Unable to open weight file. Have you run make setup?\n");
-        exit(-1);
-    }
     char buffer[1024];
 
     int *dense1_weights = (int*)malloc(DENSE1_RNUM*DENSE1_COLNUM*sizeof(int));
