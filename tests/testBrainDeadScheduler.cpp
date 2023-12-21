@@ -1,4 +1,4 @@
-#include"BrainDeadScheduler.h"
+#include"../src/BrainDeadScheduler.h"
 int main()
 {
     BrainDeadScheduler Bds(2);

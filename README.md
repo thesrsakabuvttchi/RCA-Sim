@@ -1,1 +1,7 @@
 # RCA-Sim
+
+The Reconfigurable Cycle-accurate Systolic Array Simulator (RCS Sim), aims to be a dedicated simulation framework designed to test the outputs derived from a configurable systolic array, while also achieving cycle-accurate emulation. Its primary goal is to enable the testing of neural network accuracy when using approximate compute hardware, while also providing a cycle-accurate simulation of the computations. In addition to standard neural network simulation capabilities, RCS Sim aims to offer users some degree of control over Systolic array configuration parameters and P-Unit design, facilitating modest adjustments. Moreover, the simulator is built with adaptability in mind to maintain relevance as well as to allow for future extension into a full-fledged reconfigurable NPU simulator which will include other components such as RAM and decode units to support encoded weights. We hope that RCS Sim presents a valuable tool for researchers seeking to explore matrix multiplication performance when evaluating a custom P-unit-based Systolic Array.
+
+## Implementation
+The base code implements an integer based systolic array, whith a simple scheduling algorithm for it. Invoking these allows the array to perform arbitarily sized matrix multiplications, which can then be utilized in neural network workloads. We have implemented two tests for the same based on the MNIST dataset, one of a ANN with a single layer, and one with a DNN with one hidden layer. The simulator can be exteded to support inference on any such neural network.
+

@@ -1,4 +1,4 @@
-#include"BrainDeadScheduler.h"
+#include"../src/BrainDeadScheduler.h"
 int getMaxIdx(int *arr,int size)
 {
     int max_idx=0;
