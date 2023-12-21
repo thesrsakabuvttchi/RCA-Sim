@@ -5,3 +5,5 @@ The Reconfigurable Cycle-accurate Systolic Array Simulator (RCS Sim), aims to be
 ## Implementation
 The base code implements an integer based systolic array, whith a simple scheduling algorithm for it. Invoking these allows the array to perform arbitarily sized matrix multiplications, which can then be utilized in neural network workloads. We have implemented two tests for the same based on the MNIST dataset, one of a ANN with a single layer, and one with a DNN with one hidden layer. The simulator can be exteded to support inference on any such neural network.
 
+## Running
+To run tests, please run `make setup` first to setup required weightfiles. Then run `make tests`. This should compile the various tests, which can then be run. The inference accuracy of the quantized model returned from `make setup` can be verified once the tests are run.
